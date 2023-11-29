@@ -8,4 +8,4 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def get_absolute_url(self):
-        return reverse("get_checkout_session_id", args=[self.pk])
+        return reverse("get_item", args=[self.pk])
