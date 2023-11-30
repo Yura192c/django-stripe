@@ -165,3 +165,5 @@ __pycache__
 docker-compose.yaml
 .gitignore
 .git
+
+.sqlite3

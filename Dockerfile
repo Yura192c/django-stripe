@@ -9,7 +9,7 @@ ENV PIP_ROOT_USER_ACTION=ignore
 
 RUN pip install --upgrade pip
 
-COPY Pipfile Pipfile.lock /solutionfactory-test-task/
+COPY Pipfile Pipfile.lock /app/
 RUN pip install pipenv && pipenv install --system
 
 COPY . /app/
