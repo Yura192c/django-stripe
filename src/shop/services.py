@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404
-from .models import Item, Order
-import stripe
 from django.conf import settings
+import stripe
+
+from .models import Item, Order
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -30,9 +31,11 @@ def get_item_session_id(request, pk):
 
 
 def get_order_session_id(request, pk):
+    """ Получение stripeID для заказа нескольких продуктов"""
     order = get_object_or_404(Order, id=pk)
 
     session = stripe.checkout.Session.create(
+        # payment_method_types=['card'],
         line_items=[
             {
                 'price_data': {
@@ -50,5 +53,4 @@ def get_order_session_id(request, pk):
         success_url=request.build_absolute_uri('/success'),
         cancel_url=request.build_absolute_uri(order.get_absolute_url()),
     )
-
     return session
